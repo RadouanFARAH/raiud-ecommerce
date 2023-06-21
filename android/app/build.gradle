@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.raiud.ecommerce"
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    defaultConfig {
+
+  buildToolsVersion '30.0.3'
+  namespace "com.raiud.ecommerce"
+  compileSdk 33
+  defaultConfig {
         applicationId "com.raiud.ecommerce"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+    targetSdk targetSdkVersion
+    versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
