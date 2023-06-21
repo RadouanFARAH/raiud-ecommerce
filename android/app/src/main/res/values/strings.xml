@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">raiud-ecommerce</string>
+    <string name="title_activity_main">raiud-ecommerce</string>
+    <string name="package_name">com.raiud.ecommerce</string>
+    <string name="custom_url_scheme">com.raiud.ecommerce</string>
+</resources>
