@@ -8,13 +8,16 @@ import { MyCartPageRoutingModule } from './my-cart-routing.module';
 
 import { MyCartPage } from './my-cart.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MyCartPageRoutingModule
+    MyCartPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [MyCartPage]
 })
-export class MyCartPageModule {}
+export class MyCartPageModule { }

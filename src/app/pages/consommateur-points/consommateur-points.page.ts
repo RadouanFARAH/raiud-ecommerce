@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { ParametresService } from 'src/app/services/parametres.service';
 
 @Component({
   selector: 'app-consommateur-points',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsommateurPointsPage implements OnInit {
 
-  constructor() { }
+  constructor(private paramServices: ParametresService, private navCtrl:NavController) {
+    this.getMyOrders();
+  }
 
   ngOnInit() {
+  }
+
+  data: any = [];
+  pointSomme = 0;
+  goBack() {
+    this.navCtrl.back();
+  }
+  getMyOrders() {
+    this.paramServices.getHistoryOrdersConso({id:null}).subscribe(result => {
+      this.data = result;
+      this.data.forEach((d:any) => {
+        d.datecommande = (d.datecommande).slice(0, 10);
+        if (d.rejet==0)this.pointSomme += d.pointtotal
+      });
+    })
   }
 
 }

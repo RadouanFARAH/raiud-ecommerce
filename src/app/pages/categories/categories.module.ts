@@ -8,13 +8,16 @@ import { CategoriesPageRoutingModule } from './categories-routing.module';
 
 import { CategoriesPage } from './categories.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CategoriesPageRoutingModule
+    CategoriesPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [CategoriesPage]
 })
-export class CategoriesPageModule {}
+export class CategoriesPageModule { }

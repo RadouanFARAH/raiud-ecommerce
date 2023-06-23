@@ -8,13 +8,16 @@ import { ConsommateurDemandehistoriquePageRoutingModule } from './consommateur-d
 
 import { ConsommateurDemandehistoriquePage } from './consommateur-demandehistorique.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConsommateurDemandehistoriquePageRoutingModule
+    ConsommateurDemandehistoriquePageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [ConsommateurDemandehistoriquePage]
 })
-export class ConsommateurDemandehistoriquePageModule {}
+export class ConsommateurDemandehistoriquePageModule { }

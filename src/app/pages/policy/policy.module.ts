@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { PolicyPageRoutingModule } from './policy-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { PolicyPage } from './policy.page';
 
@@ -13,7 +14,8 @@ import { PolicyPage } from './policy.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PolicyPageRoutingModule
+    PolicyPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [PolicyPage]
 })

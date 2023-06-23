@@ -1,13 +1,26 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>slide</ion-title>
+<ion-header>
+  <ion-toolbar class="cssHeader bgheader">
+
+    <ion-buttons slot="end">
+      <span class="cssBtnHeaderLeft" (click)="goBack()">
+        <fa-icon icon="arrow-left"></fa-icon>
+      </span>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">slide</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content> 
+  <img [src]="url+'/images/image_cat'+article.id+'.png'" alt="" srcset="">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{article.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{article.text}}</p>
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>

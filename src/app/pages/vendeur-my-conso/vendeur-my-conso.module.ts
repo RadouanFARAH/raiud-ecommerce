@@ -8,13 +8,16 @@ import { VendeurMyConsoPageRoutingModule } from './vendeur-my-conso-routing.modu
 
 import { VendeurMyConsoPage } from './vendeur-my-conso.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VendeurMyConsoPageRoutingModule
+    VendeurMyConsoPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [VendeurMyConsoPage]
 })
-export class VendeurMyConsoPageModule {}
+export class VendeurMyConsoPageModule { }

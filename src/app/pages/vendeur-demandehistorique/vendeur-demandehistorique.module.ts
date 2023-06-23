@@ -8,13 +8,16 @@ import { VendeurDemandehistoriquePageRoutingModule } from './vendeur-demandehist
 
 import { VendeurDemandehistoriquePage } from './vendeur-demandehistorique.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VendeurDemandehistoriquePageRoutingModule
+    VendeurDemandehistoriquePageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [VendeurDemandehistoriquePage]
 })
-export class VendeurDemandehistoriquePageModule {}
+export class VendeurDemandehistoriquePageModule { }

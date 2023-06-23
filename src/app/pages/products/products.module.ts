@@ -8,13 +8,18 @@ import { ProductsPageRoutingModule } from './products-routing.module';
 
 import { ProductsPage } from './products.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductsPageRoutingModule
+    ProductsPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [ProductsPage]
 })
-export class ProductsPageModule {}
+export class ProductsPageModule { }

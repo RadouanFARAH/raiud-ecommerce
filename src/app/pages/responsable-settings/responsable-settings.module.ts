@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ResponsableSettingsPageRoutingModule } from './responsable-settings-routing.module';
 
 import { ResponsableSettingsPage } from './responsable-settings.page';
@@ -13,7 +13,9 @@ import { ResponsableSettingsPage } from './responsable-settings.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ResponsableSettingsPageRoutingModule
+    ResponsableSettingsPageRoutingModule,
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   declarations: [ResponsableSettingsPage]
 })

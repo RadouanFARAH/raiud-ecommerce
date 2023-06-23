@@ -8,13 +8,16 @@ import { ResponsableHomePageRoutingModule } from './responsable-home-routing.mod
 
 import { ResponsableHomePage } from './responsable-home.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ResponsableHomePageRoutingModule
+    ResponsableHomePageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [ResponsableHomePage]
 })
-export class ResponsableHomePageModule {}
+export class ResponsableHomePageModule { }

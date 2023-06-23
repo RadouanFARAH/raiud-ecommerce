@@ -13,15 +13,12 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { TokeninterseptService } from './interseptors/tokenintersept.service';
 import { IonicStorageModule, Storage } from '@ionic/storage-angular';
-import { SplashScreen } from '@capacitor/splash-screen';
-import { StatusBar } from '@capacitor/status-bar';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Printer } from '@awesome-cordova-plugins/printer/ngx';
 import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { Geolocation } from '@capacitor/geolocation';
 export function jwtOptionsFactory(storage:any) {
   return {
     tokenGetter: () => {

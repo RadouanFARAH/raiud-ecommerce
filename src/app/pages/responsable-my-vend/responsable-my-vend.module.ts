@@ -8,13 +8,16 @@ import { ResponsableMyVendPageRoutingModule } from './responsable-my-vend-routin
 
 import { ResponsableMyVendPage } from './responsable-my-vend.page';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ResponsableMyVendPageRoutingModule
+    ResponsableMyVendPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [ResponsableMyVendPage]
 })
-export class ResponsableMyVendPageModule {}
+export class ResponsableMyVendPageModule { }
