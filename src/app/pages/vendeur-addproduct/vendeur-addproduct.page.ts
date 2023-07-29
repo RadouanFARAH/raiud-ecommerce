@@ -10,6 +10,7 @@ import { ResponsableService } from 'src/app/services/responsable.service';
 import { ToastService } from 'src/app/toasts/toast.service';
 import { environment } from 'src/environments/environment';
 import { v4 as uuid } from 'uuid';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 @Component({
@@ -49,8 +50,8 @@ export class VendeurAddproductPage implements OnInit {
   showSuccessAlerte2!: boolean;
   chosen_quantity_type: boolean=false;
 
-  constructor(private toast: ToastService, private directeurService: DirecteurService, private navCtrl: NavController, private sanitizer: DomSanitizer, private storage: Storage, private service: ResponsableService, private router: ActivatedRoute, public alertIonic: AlertController, private fb: FormBuilder, private paramService: ParametresService) {
-    this.storage.get('role').then((role) => {
+  constructor(private toast: ToastService, private directeurService: DirecteurService, private navCtrl: NavController, private sanitizer: DomSanitizer, private storage: StorageService, private service: ResponsableService, private router: ActivatedRoute, public alertIonic: AlertController, private fb: FormBuilder, private paramService: ParametresService) {
+    this.storage.get('role')?.then((role) => {
       if (role) {
         this.role = role
       }

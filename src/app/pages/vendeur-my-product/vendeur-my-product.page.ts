@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ProductsService } from 'src/app/services/products.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,14 +19,14 @@ export class VendeurMyProductPage implements OnInit {
   url = environment.url
   role: any;
   hasBoss: any;
-  constructor(private navCtrl:NavController,private route:Router,private storage: Storage, private productService: ProductsService, private router: ActivatedRoute) {
+  constructor(private navCtrl:NavController,private route:Router,private storage: StorageService, private productService: ProductsService, private router: ActivatedRoute) {
     this.getProductsBySeller()
-    this.storage.get('role').then((role) => {
+    this.storage.get('role')?.then((role) => {
       if (role) {
         this.role = role
       }
     })
-    this.storage.get('hasBoss').then((value) => {
+    this.storage.get('hasBoss')?.then((value) => {
         this.hasBoss = value
     })
   }

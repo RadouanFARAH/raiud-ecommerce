@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Storage } from '@ionic/storage-angular';
 import jwtDecode from 'jwt-decode';
 import { ForgotPasswordPage } from 'src/app/modals/forgot-password/forgot-password.page';
+import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -22,7 +23,7 @@ export class LoginPage implements OnInit {
   password: any = "";
   identifant: any = "";
   spinner!: boolean;
-  constructor(private modalController: ModalController, private toast: ToastController, private route: Router, private storage: Storage, private menu: MenuController, private userService: UserService, private fb: FormBuilder,) { }
+  constructor(private modalController: ModalController, private toast: ToastController, private route: Router, private storage: StorageService, private menu: MenuController, private userService: UserService, private fb: FormBuilder,) { }
 
   ngOnInit() {
     this.dataForm = this.fb.group({
@@ -61,14 +62,14 @@ export class LoginPage implements OnInit {
 
       // if (true) {
         localStorage.setItem('token', res.token);
-        await this.storage.set('token', res.token)
-        await this.storage.set('username', res['name'])
-        await this.storage.set('id', 1)
-        await this.storage.set('id', decodedToken.id)
-        await this.storage.set('role', res['role'])
+       this.storage.set('token', res.token)
+       this.storage.set('username', res['name'])
+       this.storage.set('id', 1)
+       this.storage.set('id', decodedToken.id)
+       this.storage.set('role', res['role'])
          this.userService.role.next(res['role'])
          this.userService.name.next(res['name'])
-        // await this.storage.set('tokenC', res.token)
+        // this.storage.set('tokenC', res.token)
         // this.route.navigate(["categories"])
       // } else{
       //   this.spinner = false
@@ -81,20 +82,20 @@ export class LoginPage implements OnInit {
       //   toast.present();
       // }
       if (res.role == "C") {
-        await this.storage.set('tokenC', res.token)
+       this.storage.set('tokenC', res.token)
         this.route.navigate(["categories"])
       }
       else if (res.role == "V") {
-        await this.storage.set('tokenV', res.token)
-        await this.storage.set('hasBoss', res.hasBoss)
-        await this.storage.set('ville', res.ville)
-        await this.storage.set('ID_', res.id)
+       this.storage.set('tokenV', res.token)
+       this.storage.set('hasBoss', res.hasBoss)
+       this.storage.set('ville', res.ville)
+       this.storage.set('ID_', res.id)
         this.route.navigate(["vendeur-home"])
       } else if (res.role == "R") {
-        await this.storage.set('tokenR', res.token)
+       this.storage.set('tokenR', res.token)
         this.route.navigate(["responsable-home"])
       } else if (res.role == "D") {
-        await this.storage.set('tokenD', res.token)
+       this.storage.set('tokenD', res.token)
         this.route.navigate(["directeur-home"])
       }
     }, 

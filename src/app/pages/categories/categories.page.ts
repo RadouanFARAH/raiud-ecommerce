@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { MyOrdersService } from 'src/app/services/my-orders.service';
 import { HttpClient } from '@angular/common/http';
 import { ArticleService } from 'src/app/services/article.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-categories',
@@ -111,7 +112,8 @@ export class CategoriesPage implements OnInit {
   constructor(private http: HttpClient,
     private articleService:ArticleService,
     private paramServices: ParametresService,
-    private orderService: MyOrdersService, private navCtrl: NavController, private storage: Storage, private router: ActivatedRoute, private menu: MenuController, private route: Router, private paramService: ParametresService) {
+    private storage:StorageService,
+    private orderService: MyOrdersService, private navCtrl: NavController, private router: ActivatedRoute, private menu: MenuController, private route: Router, private paramService: ParametresService) {
     this.orderService.calculate_quantity()
     this.commandeNum = this.orderService.cart_quantity.value
     this.orderService.cart_quantity.subscribe((qte) => {
@@ -173,7 +175,7 @@ export class CategoriesPage implements OnInit {
   async logOut() {
     // this.route.navigate(['login']);
     localStorage.clear();
-    this.storage.clear().then((e)=>{
+    this.storage.clear()?.then((e)=>{
       this.route.navigate(['/login'])
     })
     

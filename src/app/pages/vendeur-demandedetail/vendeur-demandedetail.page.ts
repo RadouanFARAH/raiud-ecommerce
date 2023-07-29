@@ -4,9 +4,7 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { ParametresService } from 'src/app/services/parametres.service';
 import { environment } from 'src/environments/environment';
 import { GoogleMap } from '@capacitor/google-maps';
-// import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Geolocation } from '@capacitor/geolocation';
-
 import { Printer, PrintOptions } from '@awesome-cordova-plugins/printer/ngx';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@awesome-cordova-plugins/launch-navigator/ngx';
 import { ToastService } from 'src/app/toasts/toast.service';
@@ -82,28 +80,6 @@ export class VendeurDemandedetailPage implements OnInit {
   }
     print(code:any) {
         window.print()
-        /*
-        this.printer.isAvailable().then(() => {
-            console.log("printer.isAvailable()");
-            let options: PrintOptions = {
-                name: `${code} الفاتورة`,
-                duplex: true,
-                orientation: 'portrait',
-                monochrome: true
-            }
-       
-            let content = document.getElementById("printable").innerHTML
-            content = `<style type='text/css'>${css} <style>` + content
-            this.printer.print(content, options).then(() => {
-                console.log("doc printed");
-            }, (err) => {
-                console.log(err);
-            });
-        }, () => {
-            console.log("printer is not Available()");
-        });
-        */
-
     }
     ngOnInit() {
     }
@@ -148,19 +124,6 @@ export class VendeurDemandedetailPage implements OnInit {
                 lat: this.order_details[0].lat,
                 lng: this.order_details[0].lng
             }
-            // this.createMap(this.coordinate);
         })
     }
-
-    // async createMap(coordinate) {
-    //     const newMap = await GoogleMap.create({
-    //         id: 'my-map', // Unique identifier for this map instance
-    //         element: this.mapRef.nativeElement, // reference to the capacitor-google-map element
-    //         apiKey: this.apiKey, // Your Google Maps API Key
-    //         config: {
-    //             center: coordinate, // The initial position to be rendered by the map
-    //             zoom: 10, // The initial zoom level to be rendered by the map
-    //         },
-    //     });
-    // }
 }

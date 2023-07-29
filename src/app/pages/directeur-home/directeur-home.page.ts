@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { ResponsableService } from 'src/app/services/responsable.service';
 import { UserService } from 'src/app/services/user.service';
-import { Storage } from '@ionic/storage-angular';
 import { DirecteurService } from 'src/app/services/directeur.service';
 import { ToastService } from 'src/app/toasts/toast.service';
 import { environment } from 'src/environments/environment';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-directeur-home',
@@ -70,7 +69,7 @@ export class DirecteurHomePage implements OnInit {
   detail: boolean = false;
   url = environment.url;
   role: any;
-  constructor(private toast: ToastService, private route: Router, private storage: Storage, private userService: UserService, private menu: MenuController, private directeurService: DirecteurService) {
+  constructor(private toast: ToastService, private route: Router, private storage: StorageService, private userService: UserService, private menu: MenuController, private directeurService: DirecteurService) {
     this.data.jour = new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long' });
     this.getDashboard()
   }
@@ -107,7 +106,7 @@ export class DirecteurHomePage implements OnInit {
     this.role = await this.storage.get('role')
     if (this.role == 'D') {
       this.userService.login({ responsable }).subscribe({next: async (res: any) => {
-        await this.storage.set('token', res.token)
+        this.storage.set('token', res.token)
         this.route.navigate(["responsable-home"])
       }, error: (err) => {
         this.toast.presentErrorToast('', 3000)

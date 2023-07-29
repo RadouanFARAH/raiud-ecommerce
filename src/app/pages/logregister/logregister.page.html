@@ -21,7 +21,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">الإسم الكامل</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">الإسم الكامل</ion-label>
             <ion-input placeholder="الإسم الشخصي و العائلي" formControlName="nomprenom" type="text"
               class="cssInput tajawal-Medium">
             </ion-input>
@@ -32,7 +32,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">المدينة</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">المدينة</ion-label>
             <ion-input *ngIf="!beingRegistred" [disabled]="villeDisabled" formControlName="ville" type="text"
               class="cssInput tajawal-Medium">
             </ion-input>
@@ -48,7 +48,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">الحي</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">الحي</ion-label>
             <ion-select placeholder="إختر الحي" formControlName="adresselogement" class="cssInput tajawal-Medium">
               <ion-select-option *ngFor="let quartier of quartiers" [value]="quartier.id">{{quartier.name}}
               </ion-select-option>
@@ -60,7 +60,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">العنوان</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">العنوان</ion-label>
             <ion-input placeholder="ادخل الزنقة ورقم السكن" formControlName="adresseentreprise" type="text"
               class="cssInput tajawal-Medium">
             </ion-input>
@@ -70,7 +70,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">رقم الهاتف المحمول</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">رقم الهاتف المحمول</ion-label>
             <ion-input (keypress)="preventCaracters($event)"
               placeholder="&#8226;&#8226;  &#8226;&#8226;  &#8226;&#8226;  &#8226;&#8226; 06" formControlName="tel"
               type="text" class="cssInput tajawal-Medium">
@@ -82,7 +82,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">رقم الهاتف الواتساب</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">رقم الهاتف الواتساب</ion-label>
             <ion-input (keypress)="preventCaracters($event)"
               placeholder="&#8226;&#8226;  &#8226;&#8226;  &#8226;&#8226;  &#8226;&#8226; 06" formControlName="whatsapp"
               type="text" class="cssInput tajawal-Medium">
@@ -94,7 +94,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">الحساب الالكتروني</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">الحساب الالكتروني</ion-label>
             <ion-input placeholder="إدخال البريد الإلكتروني" formControlName="email" type="email"
               class="cssInput tajawal-Medium">
             </ion-input>
@@ -105,7 +105,7 @@
       <ion-row *ngIf="!updateData || (updateData && updateData.role==='V')">
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">إسم المتجر</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">إسم المتجر</ion-label>
             <ion-input placeholder="إدخال إسم المتجر" formControlName="nameStore" type="nameStore"
               class="cssInput tajawal-Medium">
             </ion-input>
@@ -116,7 +116,7 @@
       <ion-row *ngIf="!updateData || (updateData && updateData.role==='V')">
         <ion-col class="ion-no-padding">
           <div class="cssToRight">
-            <ion-label class="cssLabel tajawal-Medium">نوع المتجر</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">نوع المتجر</ion-label>
             <ion-input placeholder="إدخال نوع المتجر" formControlName="typeStore" type="typeStore"
               class="cssInput tajawal-Medium">
             </ion-input>
@@ -139,7 +139,7 @@
         <ion-row *ngIf="!beingRegistred">
           <ion-col class="ion-no-padding">
             <div class="cssToRight">
-              <ion-label class="cssLabel tajawal-Medium">أدخل الرمز السري</ion-label>
+              <ion-label  aria-label=""  class="cssLabel tajawal-Medium">أدخل الرمز السري</ion-label>
               <ion-input formControlName="password"
                 placeholder="&#8226; &#8226; &#8226; &#8226; &#8226; &#8226; &#8226; &#8226;" type="password"
                 class="cssInput tajawal-Medium">
@@ -162,7 +162,7 @@
         <ion-col class="ion-no-padding">
           <div style="margin-top: 16px;">
             <div style="display: inline-grid;">
-              <ion-label class="cssLabel tajawal-Medium">إعادة تسجيل موقعه في الخريطة؟</ion-label>
+              <ion-label  aria-label=""  class="cssLabel tajawal-Medium">إعادة تسجيل موقعه في الخريطة؟</ion-label>
               <ion-toggle [checked]="wantedToUpdateCoordinates" (ionChange)="toggelwantedToUpdateCoordinates()">
               </ion-toggle>
             </div>

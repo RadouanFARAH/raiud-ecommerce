@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage-angular';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SharedService } from './shared.service';
 
@@ -17,8 +16,8 @@ import { ToastService } from './toasts/toast.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ParametresService } from './services/parametres.service';
 import { environment } from 'src/environments/environment';
-// import { GeolocationOptions } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Geolocation, PositionOptions } from '@capacitor/geolocation';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -43,13 +42,21 @@ export class AppComponent {
     private paramService: ParametresService,
     private toast: ToastService,
     private sanitizer: DomSanitizer,
-    private storage: Storage,
     private helper: JwtHelperService,
+    private storage:StorageService,
     private route: ActivatedRoute,
     private geolocation: Geolocation,
     private sharedService: SharedService
   ) {
-
+    console.log("**************************************************************TEST***************************************************************************");
+    this.userService.test().subscribe({
+      next:(res:any)=>{
+        console.log("result: ",res);
+      },
+      error:(error:any)=>{
+        console.log("error: ",error);
+      }
+    })
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       console.log();
@@ -68,18 +75,18 @@ export class AppComponent {
     this.sharedService.setVariableValue(newValue);
   }
   async ngOnInit() {
-    await this.storage.create();
-    this.storage.get('role').then((role) => {
+    // await this.storage.create();
+    this.storage.get('role')?.then((role) => {
       if (role) {
         this.role = role;
       }
     });
-    this.storage.get('hasBoss').then((value) => {
+    this.storage.get('hasBoss')?.then((value) => {
       console.log("hasBoss", value);
       
       this.hasBoss = value
     })
-    this.storage.get('id').then((id) => {
+    this.storage.get('id')?.then((id) => {
       if (id) {
         this.connectedID = id;
         console.log(
@@ -94,7 +101,7 @@ export class AppComponent {
           '.png';
       }
     });
-    this.storage.get('username').then((username) => {
+    this.storage.get('username')?.then((username) => {
       if (username) {
         this.name = username;
       }
@@ -111,19 +118,19 @@ export class AppComponent {
   logout(d:any) {
 
     if (d === 'C') {
-      this.storage.get('tokenV').then((tokenV) => {
+      this.storage.get('tokenV')?.then((tokenV) => {
         if (tokenV) {
           this.storage.set('token', tokenV);
           this.router.navigate(['/vendeur-home']).then(() => {
           });
         } else {
-          this.storage.get('tokenR').then((tokenR) => {
+          this.storage.get('tokenR')?.then((tokenR) => {
             if (tokenR) {
               this.storage.set('token', tokenR);
               this.router.navigate(['/responsable-home']).then(() => {
               });
             } else {
-              this.storage.clear().then((e) => {
+              this.storage.clear()?.then((e) => {
                 this.storage.set('visited', true);
                 this.router.navigate(['/login']).then(() => {
                 });
@@ -133,13 +140,13 @@ export class AppComponent {
         }
       });
     } else if (d == 'V') {
-      this.storage.get('tokenR').then((tokenR) => {
+      this.storage.get('tokenR')?.then((tokenR) => {
         if (tokenR) {
           this.storage.set('token', tokenR);
           this.router.navigate(['/responsable-home']).then(() => {
           });
         } else {
-          this.storage.clear().then((e) => {
+          this.storage.clear()?.then((e) => {
             this.storage.set('visited', true);
             this.router.navigate(['/login']).then(() => {
             });
@@ -147,13 +154,13 @@ export class AppComponent {
         }
       });
     } else if (d == 'R') {
-      this.storage.get('tokenD').then((tokenD) => {
+      this.storage.get('tokenD')?.then((tokenD) => {
         if (tokenD) {
           this.storage.set('token', tokenD);
           this.router.navigate(['/directeur-home']).then(() => {
           });
         } else {
-          this.storage.clear().then((e) => {
+          this.storage.clear()?.then((e) => {
             this.storage.set('visited', true);
             this.router.navigate(['/login']).then(() => {
             });
@@ -161,7 +168,7 @@ export class AppComponent {
         }
       });
     } else if (d == 'D') {
-      this.storage.clear().then((e) => {
+      this.storage.clear()?.then((e) => {
         this.storage.set('visited', true);
         this.router.navigate(['/login']).then(() => {
         });
@@ -170,13 +177,13 @@ export class AppComponent {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      StatusBar.setStyle({style:Style.Default})
+      StatusBar.setStyle({style:Style.Default}).catch(()=>{});
 
-      SplashScreen.hide();
+      SplashScreen.hide().catch(()=>{});;
       this.platform.backButton.subscribeWithPriority(9999, () => {
         // do nothing
       });
-      this.storage.get('role').then((role) => {
+      this.storage.get('role')?.then((role) => {
         console.log(" route ************** ", this.router.url)
 
         if (this.router.url == "/policy") {
@@ -260,7 +267,7 @@ export class AppComponent {
       maximumAge: 0              // Set the maximum age for cached location
     };
 
-    this.subscription = Geolocation.watchPosition({},()=>{})
+    this.subscription = Geolocation.watchPosition({},()=>{}).catch(()=>{})
   }
 
 

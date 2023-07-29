@@ -12,6 +12,7 @@ import { ToastService } from 'src/app/toasts/toast.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ParametresService } from 'src/app/services/parametres.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-logregister',
@@ -54,11 +55,11 @@ export class LogregisterPage implements OnInit {
   image: any;
   updateData: any;
   wantedToUpdateCoordinates: any=false;
-  constructor(private platform: Platform, private paramService: ParametresService, private geolocation: Geolocation, private sanitizer: DomSanitizer, private toast: ToastService, private storage: Storage, private navCtrl: NavController, private locationService: VilleQuartierService, private fb: FormBuilder, private userService: UserService, private activeRoute: ActivatedRoute, private route: Router) {
-    this.storage.get('id').then((id) => {
+  constructor(private platform: Platform, private paramService: ParametresService, private geolocation: Geolocation, private sanitizer: DomSanitizer, private toast: ToastService, private storage: StorageService, private navCtrl: NavController, private locationService: VilleQuartierService, private fb: FormBuilder, private userService: UserService, private activeRoute: ActivatedRoute, private route: Router) {
+    this.storage.get('id')?.then((id) => {
       this.id = id
     })
-    this.storage.get('username').then((username) => {
+    this.storage.get('username')?.then((username) => {
       this.username = username
     })
     this.activeRoute.queryParams.subscribe((params) => {
@@ -307,10 +308,10 @@ export class LogregisterPage implements OnInit {
             }
             this.userService.login(dt).subscribe(async (res: any) => {
               let decodedToken: any = jwtDecode(res.token)
-              await this.storage.set('token', res.token)
-              await this.storage.set('username', res['name'])
-              await this.storage.set('id', decodedToken.id)
-              await this.storage.set('role', res['role'])
+              this.storage.set('token', res.token)
+              this.storage.set('username', res['name'])
+              this.storage.set('id', decodedToken.id)
+              this.storage.set('role', res['role'])
                this.userService.name.next(res['name'])
                this.userService.role.next(res['role'])
               this.route.navigate(["categories"])

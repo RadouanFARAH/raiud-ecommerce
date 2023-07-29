@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class ParametresService {
 
   Url = environment.url;
-  constructor(private storage: Storage, public http: HttpClient) { }
+  constructor(private storage: StorageService, public http: HttpClient) {}
    getVendeur_dashboard(data:any){
     return this.http.post(this.Url + "/vendeur_dashboard", data)
    }
@@ -98,6 +99,7 @@ export class ParametresService {
     return this.http.post(this.Url + "/orders" + "/getOrdersConsommateur", data)
   }
 
+  
   // for authentification
   async getToken() {
     return await this.storage.get('token');

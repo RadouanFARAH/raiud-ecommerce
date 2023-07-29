@@ -19,7 +19,7 @@
       <ion-row *ngIf="role=='R'">
         <ion-col class="ion-no-padding">
           <div *ngIf="!product">
-            <ion-label class="cssLabel tajawal-Bold">البائعين</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">البائعين</ion-label>
             <ion-select multiple="true" placeholder="إختر البائع" class="cssInput tajawal-Medium"
               formControlName="lvendeurs" okText="OK" cancelText="Annuler">
               <ion-select-option *ngFor="let v of vendeurs" [value]="v.id">{{v.nomprenom}}</ion-select-option>
@@ -30,7 +30,7 @@
       <ion-row *ngIf="role=='D'">
         <ion-col class="ion-no-padding">
           <div *ngIf="!product">
-            <ion-label class="cssLabel tajawal-Bold">المسؤولين</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">المسؤولين</ion-label>
             <ion-select multiple="true" placeholder="إختر المسؤول" class="cssInput tajawal-Medium"
               formControlName="lresponsables" okText="OK" cancelText="Annuler">
               <ion-select-option *ngFor="let v of responsables" [value]="v.id">{{v.nomprenom}}</ion-select-option>
@@ -41,7 +41,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">اسم المنتج</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">اسم المنتج</ion-label>
             <ion-input placeholder="ضع إسم مناسب لمنتوجك الخاص" type="text" class="cssInput tajawal-Medium"
               formControlName="nom">
             </ion-input>
@@ -54,7 +54,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">الثمن الأصلي</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">الثمن الأصلي</ion-label>
             <ion-input type="number" (keypress)="preventCaracters($event)" min="0" placeholder="ضع ثمن المنتوج"
               class="cssInput tajawal-Medium" formControlName="prixInitial">
             </ion-input>
@@ -62,7 +62,7 @@
         </ion-col>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">ثمن التخفيض</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">ثمن التخفيض</ion-label>
             <ion-input type="number" (keypress)="preventCaracters($event)" min="0" placeholder="ضع ثمن تخفيض المنتوج"
               class="cssInput tajawal-Medium" formControlName="prixFinal">
             </ion-input>
@@ -77,7 +77,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">الفئات</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">الفئات</ion-label>
             <ion-select multiple placeholder="إختر الفئة" class="cssInput tajawal-Medium" formControlName="category"
               okText="OK" cancelText="Annuler">
               <ion-select-option *ngFor="let c of categories" [value]="c.id">{{c.nom}}</ion-select-option>
@@ -92,7 +92,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">الوصف</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">الوصف</ion-label>
             <!-- <ion-input placeholder="أضف وصف للمنتوج الخاص بك" type="text" class="cssInput tajawal-Medium">
             </ion-input> -->
             <ion-textarea rows="3" cols="20" class="cssTextAera tajawal-Medium" placeholder="أضف وصف للمنتوج الخاص بك"
@@ -105,7 +105,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">الكمية (منتج) </ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">الكمية (منتج) </ion-label>
             <ion-input type="number" (keypress)="preventCaracters($event)" min="0" placeholder="ضع الكمية المنتوج"
               class="cssInput tajawal-Medium" formControlName="quantity">
             </ion-input>
@@ -113,7 +113,7 @@
         </ion-col>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">كم منتج في الصندوق</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">كم منتج في الصندوق</ion-label>
             <ion-input type="number" (keypress)="preventCaracters($event)" min="0" placeholder="ضع الكمية"
               class="cssInput tajawal-Medium" formControlName="qte_inbox">
             </ion-input>
@@ -125,22 +125,22 @@
           <ion-list>
             <ion-radio-group formControlName="quantity_type">
               <ion-list-header>
-                <ion-label>نوع الكمية في الطلبية</ion-label>
+                <ion-label  aria-label="" >نوع الكمية في الطلبية</ion-label>
               </ion-list-header>
 
               <ion-item>
-                <ion-label>غير محدودة</ion-label>
+                <ion-label  aria-label="" >غير محدودة</ion-label>
                 <ion-radio slot="start" [value]="false"></ion-radio>
               </ion-item>
               <ion-item>
-                <ion-label>محدودة</ion-label>
+                <ion-label  aria-label="" >محدودة</ion-label>
                 <ion-radio slot="start" [value]="true"></ion-radio>
               </ion-item>
             </ion-radio-group>
           </ion-list>
 
           <!-- <div>
-            <ion-label class="cssLabel tajawal-Bold">نوع الكمية في الطلبية</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">نوع الكمية في الطلبية</ion-label>
             <ion-select multiple placeholder="إختر النوع" class="cssInput tajawal-Medium"
               formControlName="quantity_type" okText="OK" cancelText="Annuler">
               <ion-select-option value="0">غير محدودة</ion-select-option>
@@ -152,7 +152,7 @@
       <ion-row >
         <ion-col class="ion-no-padding">
           <div *ngIf="chosen_quantity_type">
-            <ion-label class="cssLabel tajawal-Bold">حدد الكمية التي لا تتعدى الطلبية الواحدة</ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">حدد الكمية التي لا تتعدى الطلبية الواحدة</ion-label>
             <ion-input (keypress)="preventCaracters($event)" type="number" placeholder="حدد الكمية التي لا تتعدى الطلبية الواحدة" class="cssInput tajawal-Medium"
               formControlName="quantity_type_value">
             </ion-input>
@@ -162,7 +162,7 @@
       <ion-row>
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">ثمن التوصيل </ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">ثمن التوصيل </ion-label>
             <ion-input (keypress)="preventCaracters($event)" placeholder="ضع ثمن التوصيل " type="text"
               class="cssInput tajawal-Medium" formControlName="deliveryPrice">
             </ion-input>
@@ -171,7 +171,7 @@
 
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">نقطة  المستهلك </ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">نقطة  المستهلك </ion-label>
             <ion-input (keypress)="preventCaracters($event)" placeholder="ضع نقطة  المستهلك" type="text"
               class="cssInput tajawal-Medium" formControlName="point_c">
             </ion-input>
@@ -180,7 +180,7 @@
 
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">نقطة البائع  </ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">نقطة البائع  </ion-label>
             <ion-input (keypress)="preventCaracters($event)" placeholder="ضع نقطة البائع"  type="text"  class="cssInput tajawal-Medium" formControlName="point_v">
             </ion-input>
           </div>
@@ -195,7 +195,7 @@
       <ion-row *ngIf="special">
         <ion-col class="ion-no-padding">
           <div>
-            <ion-label class="cssLabel tajawal-Bold">ثمنه في عروض اليوم </ion-label>
+            <ion-label  aria-label=""  class="cssLabel tajawal-Bold">ثمنه في عروض اليوم </ion-label>
             <ion-input (keypress)="preventCaracters($event)" placeholder="ضع ثمنه في عروض اليوم " type="text"
               class="cssInput tajawal-Medium" formControlName="prixspecial">
             </ion-input>

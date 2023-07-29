@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage-angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { ParametresService } from 'src/app/services/parametres.service';
 import { ResponsableService } from 'src/app/services/responsable.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 import { VendeurMyConsoService } from 'src/app/services/vendeur-my-conso.service';
 import { VilleQuartierService } from 'src/app/services/ville-quartier.service';
@@ -77,13 +78,13 @@ export class ResponsableSettingsPage implements OnInit {
   hasBoss: any;
   constructor(
     private articleService: ArticleService,
-    private sanitizer: DomSanitizer, private fb: FormBuilder, private navCtrl: NavController, private userService: UserService, private toast: ToastService, private paramService: ParametresService, private storage: Storage, private toastCtrl: ToastController, private vendeurService: VendeurMyConsoService, private villesService: VilleQuartierService, private responsableService: ResponsableService) {
+    private sanitizer: DomSanitizer, private fb: FormBuilder, private navCtrl: NavController, private userService: UserService, private toast: ToastService, private paramService: ParametresService, private storage: StorageService, private toastCtrl: ToastController, private vendeurService: VendeurMyConsoService, private villesService: VilleQuartierService, private responsableService: ResponsableService) {
 
   }
   ngOnInit() {
     console.log("getting role");
 
-    this.storage.get('role').then((role) => {
+    this.storage.get('role')?.then((role) => {
       console.log(" role is", role);
 
       if (role) {
@@ -95,17 +96,17 @@ export class ResponsableSettingsPage implements OnInit {
         }
       }
     })
-    this.storage.get('hasBoss').then((value) => {
+    this.storage.get('hasBoss')?.then((value) => {
       this.hasBoss = value
       if (!this.hasBoss) {
         console.log('hasBoss', this.hasBoss);
 
-        this.storage.get('ville').then((value) => {
+        this.storage.get('ville')?.then((value) => {
           console.log('ville', value);
 
           if (value) {
             this.getQuartierByVille(value)
-            this.storage.get('ID_').then((value) => {
+            this.storage.get('ID_')?.then((value) => {
               console.log('ID_', value);
 
               if (value) {

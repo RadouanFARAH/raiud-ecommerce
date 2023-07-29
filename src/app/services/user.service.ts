@@ -14,8 +14,8 @@ export class UserService {
     return this.http.post(this.Url + '/getFeedbacks', data)
   }
 
-  name = new BehaviorSubject('')
-  role = new BehaviorSubject('')
+  name = new BehaviorSubject('');
+  role = new BehaviorSubject('');
   Url = environment.url + "/user";
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,9 @@ export class UserService {
   }
   getGoal() {
     return this.http.get(this.Url + '/getGoalByuser')
+  }
+  test(){
+    return this.http.get(environment.url  + '/test')
   }
   setAppCost(data:any) {
     return this.http.post(this.Url + '/setAppCost', data);

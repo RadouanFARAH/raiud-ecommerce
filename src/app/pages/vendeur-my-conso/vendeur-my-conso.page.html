@@ -45,21 +45,21 @@
             <ion-list>
               <ion-radio-group (ionChange)="dayChanged()" [(ngModel)]="day">
                 <ion-list-header>
-                  <ion-label class="cssLibel tajawal-Bold" style="text-align: center;">
+                  <ion-label  aria-label=""  class="cssLibel tajawal-Bold" style="text-align: center;">
                     الايام
                   </ion-label>
                 </ion-list-header>
 
 
                 <ion-item *ngFor="let d of data" style="--background: #f1f2f6;margin: 10px;">
-                  <ion-label class="cssLibel tajawal-Bold">{{d.jour}} -- {{d.quartier}}</ion-label>
+                  <ion-label  aria-label=""  class="cssLibel tajawal-Bold">{{d.jour}} -- {{d.quartier}}</ion-label>
                   <ion-radio [value]="d.day"></ion-radio>
                 </ion-item>
               
               </ion-radio-group>
             </ion-list>
             <!-- <div class="cssContainer cssSelect">
-              <ion-label class="cssLibel tajawal-Bold">اليوم :</ion-label>
+              <ion-label  aria-label=""  class="cssLibel tajawal-Bold">اليوم :</ion-label>
               <ion-select (ionChange)="dayChanged()" [value]="day" class="cssLibel tajawal-Boldd">
                 <ion-select-option  *ngFor="let d of data" [value]="d.day" >
                   {{d.jour}} {{d.day}} 

@@ -12,6 +12,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { ParametresService } from 'src/app/services/parametres.service';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@awesome-cordova-plugins/launch-navigator/ngx';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-vendeur-demande-conso',
@@ -65,13 +66,13 @@ export class VendeurDemandeConsoPage implements OnInit {
       // complete: () => console.info('complete') 
     });
   }
-  constructor(private launchnavigator: LaunchNavigator, private geolocation: Geolocation, private paramService: ParametresService, private goelocal: Geolocation, private navCtrl: NavController, private toast: ToastService, private route: Router, private storage: Storage, private userService: UserService, private router: ActivatedRoute, private callNumber: CallNumberService, private modalController: ModalController, private activeRoute: ActivatedRoute) {
-    this.storage.get('role').then((role) => {
+  constructor(private launchnavigator: LaunchNavigator, private geolocation: Geolocation, private paramService: ParametresService, private goelocal: Geolocation, private navCtrl: NavController, private toast: ToastService, private route: Router, private storage: StorageService, private userService: UserService, private router: ActivatedRoute, private callNumber: CallNumberService, private modalController: ModalController, private activeRoute: ActivatedRoute) {
+    this.storage.get('role')?.then((role) => {
       if (role) {
         this.role = role
       }
     })
-    this.storage.get('id').then((id) => {
+    this.storage.get('id')?.then((id) => {
       if (id) {
         this.giver_id = id
       }
@@ -198,12 +199,12 @@ export class VendeurDemandeConsoPage implements OnInit {
         if (params.codecommande) {
 
           this.paramService.getOrderDetails({ code: params.codecommande }).subscribe((res: any) => {
-            Geolocation.getCurrentPosition().then((result: { coords: { latitude: any; longitude: any; }; }) => {
+            Geolocation.getCurrentPosition().then((result: any) => {
               // this.order_details = JSON.stringify(res)              
               this.link = `https://www.google.com/maps/dir/${result.coords.latitude},${result.coords.longitude}/${res[0].lat},${res[0].lng}`;
               // console.log(this.link, "\n", this.order_details);
 
-            })
+            }).catch(()=>{})
           })
         }
 
@@ -214,7 +215,7 @@ export class VendeurDemandeConsoPage implements OnInit {
 
   goTo(consommateur:any) {
     if (this.role == 'V' || this.role == 'R') this.userService.login({ consommateur }).subscribe(async (res: any) => {
-      await this.storage.set('token', res.token)
+      this.storage.set('token', res.token)
       this.route.navigate(["/categories"])
     }, (err: any) => {
       this.toast.presentErrorToast('', 3000)

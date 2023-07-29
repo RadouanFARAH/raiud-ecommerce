@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 import { VendeurStatisticsService } from 'src/app/services/vendeur-statistics.service';
 
@@ -26,8 +27,8 @@ export class VendeurStatistiqueVentePage implements OnInit {
   points_goal: any;
   orders_goal: any;
   numProductIDs: any[] = [];
-  constructor(private userService: UserService, private stats: VendeurStatisticsService, private storage: Storage, private navCtrl: NavController) {
-    this.storage.get('role').then((role) => {
+  constructor(private userService: UserService, private stats: VendeurStatisticsService, private storage: StorageService, private navCtrl: NavController) {
+    this.storage.get('role')?.then((role) => {
       console.log(role);
 
       if (role) {

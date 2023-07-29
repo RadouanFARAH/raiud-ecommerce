@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/toasts/toast.service';
 import { ActionSheetController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { VendeurStatisticsService } from 'src/app/services/vendeur-statistics.service';
+import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-responsable-home',
   templateUrl: './responsable-home.page.html',
@@ -52,10 +53,10 @@ export class ResponsableHomePage implements OnInit {
   productIDs!: any[];
   arrmonths2 = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
 
-  constructor(private stats: VendeurStatisticsService, private actionSheetCtrl: ActionSheetController, private toast: ToastService, private route: Router, private storage: Storage, private userService: UserService, private menu: MenuController, private responsableService: ResponsableService, private router: Router) {
+  constructor(private stats: VendeurStatisticsService, private actionSheetCtrl: ActionSheetController, private toast: ToastService, private route: Router, private storage: StorageService, private userService: UserService, private menu: MenuController, private responsableService: ResponsableService, private router: Router) {
     this.data.jour = new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long' });
     this.getVendeurByResponsable()
-    this.storage.get('role').then((role) => {
+    this.storage.get('role')?.then((role) => {
 
       if (role) {
         this.role = role
