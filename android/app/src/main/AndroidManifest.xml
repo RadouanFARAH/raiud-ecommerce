@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
       >
-        <activity
+      <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyD3MM2b5G0CIqWHPSo8790JAzNiFOS-Tro"/>
+      <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
