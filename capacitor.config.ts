@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.raiud.ecommerce',
-  appName: 'raiud-ecommerce',
+  appId: 'io.ionic.raiud',
+  appName: 'RAIUD Ecommerce',
   webDir: 'www',
   server: {
     androidScheme: 'https'
