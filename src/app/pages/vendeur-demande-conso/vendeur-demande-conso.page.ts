@@ -66,7 +66,7 @@ export class VendeurDemandeConsoPage implements OnInit {
       // complete: () => console.info('complete') 
     });
   }
-  constructor(private launchnavigator: LaunchNavigator, private geolocation: Geolocation, private paramService: ParametresService, private goelocal: Geolocation, private navCtrl: NavController, private toast: ToastService, private route: Router, private storage: StorageService, private userService: UserService, private router: ActivatedRoute, private callNumber: CallNumberService, private modalController: ModalController, private activeRoute: ActivatedRoute) {
+  constructor(private launchnavigator: LaunchNavigator, private geolocation: Geolocation, private paramService: ParametresService, private navCtrl: NavController, private toast: ToastService, private route: Router, private storage: StorageService, private userService: UserService, private router: ActivatedRoute, private callNumber: CallNumberService, private modalController: ModalController, private activeRoute: ActivatedRoute) {
     this.storage.get('role')?.then((role) => {
       if (role) {
         this.role = role

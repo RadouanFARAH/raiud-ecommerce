@@ -96,21 +96,22 @@ export class ResponsableSettingsPage implements OnInit {
         }
       }
     })
+
     this.storage.get('hasBoss')?.then((value) => {
       this.hasBoss = value
       if (!this.hasBoss) {
         console.log('hasBoss', this.hasBoss);
 
-        this.storage.get('ville')?.then((value) => {
-          console.log('ville', value);
+        this.storage.get('ville')?.then((value2) => {
+          console.log('ville', value2);
 
-          if (value) {
-            this.getQuartierByVille(value)
-            this.storage.get('ID_')?.then((value) => {
-              console.log('ID_', value);
+          if (value2) {
+            this.getQuartierByVille(value2)
+            this.storage.get('ID_')?.then((value3) => {
+              console.log('ID_', value3);
 
-              if (value) {
-                this.getVendeurById(value)
+              if (value3) {
+                this.getVendeurById(value3)
               }
             })
           }
@@ -321,6 +322,54 @@ export class ResponsableSettingsPage implements OnInit {
 
   }
   async setVendeurDayZone() {
+    this.spinner1 = true
+    console.log(this.selectedVendeur1, this.selectedDay, this.selectedQuartier);
+
+    if (this.selectedDay.length == 0 || this.selectedVendeur1?.length == 0 || !this.selectedQuartier) {
+      this.toast.presentErrorToast('', 3000)
+      this.spinner1 = false
+    } else {
+      console.log("selectedVendeur 1: ", this.selectedVendeur1);
+
+      for (let index = 0; index < this.selectedDay.length; index++) {
+        const element = this.selectedDay[index];
+        console.log("selectedVendeur 1: ", this.selectedVendeur1);
+
+        let data = {
+          mode: '',
+          idvendeur: this.selectedVendeur1.id,
+          idquartier: this.selectedQuartier,
+          day: element
+        }
+        let number = await this.getVendeurDayZone(data)
+        if (number == 0) {
+          let done = await this.callSetVendeurDayZone(data)
+          if (!done) {
+            this.spinner1 = false
+            this.presentErrorToast('حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا');
+            break
+            return
+          }
+        } else {
+          data.mode = 'U'
+          let done = await this.callSetVendeurDayZone(data)
+          if (!done) {
+            this.spinner1 = false
+            this.presentErrorToast('حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا');
+            break
+            return
+          }
+        }
+      }
+      this.spinner1 = false
+      this.presentSuccessToast('تمت العملية بنجاح');
+      this.selectedQuartier = null
+      this.selectedDay = []
+    }
+
+
+  }
+  async setVendeurDayZone2() {
     this.spinner1 = true
     console.log(this.selectedVendeur1, this.selectedDay, this.selectedQuartier);
 

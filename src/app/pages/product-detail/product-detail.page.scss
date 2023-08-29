@@ -1,10 +1,10 @@
-ion-slides {
+swiper-container {
     height: 54%;
     background: #fff;
     // box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
-ion-slides img{
+swiper-container img{
     width: 100%;
     height: auto;
 }
@@ -225,7 +225,7 @@ ion-button{
     font-weight: 600;
 }
 @media only screen and (max-width: 362px) {
-    ion-slides {
+    swiper-container {
         height: 50%;
     }
     .cssPromotion{

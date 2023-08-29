@@ -55,7 +55,7 @@ export class LogregisterPage implements OnInit {
   image: any;
   updateData: any;
   wantedToUpdateCoordinates: any=false;
-  constructor(private platform: Platform, private paramService: ParametresService, private geolocation: Geolocation, private sanitizer: DomSanitizer, private toast: ToastService, private storage: StorageService, private navCtrl: NavController, private locationService: VilleQuartierService, private fb: FormBuilder, private userService: UserService, private activeRoute: ActivatedRoute, private route: Router) {
+  constructor(private platform: Platform, private paramService: ParametresService, private sanitizer: DomSanitizer, private toast: ToastService, private storage: StorageService, private navCtrl: NavController, private locationService: VilleQuartierService, private fb: FormBuilder, private userService: UserService, private activeRoute: ActivatedRoute, private route: Router) {
     this.storage.get('id')?.then((id) => {
       this.id = id
     })

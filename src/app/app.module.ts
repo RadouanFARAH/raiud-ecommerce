@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
@@ -14,11 +14,11 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { TokeninterseptService } from './interseptors/tokenintersept.service';
 import { IonicStorageModule, Storage } from '@ionic/storage-angular';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Printer } from '@awesome-cordova-plugins/printer/ngx';
 import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
 export function jwtOptionsFactory(storage:any) {
   return {
     tokenGetter: () => {

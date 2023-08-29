@@ -38,6 +38,10 @@
     border-radius: 6px;
 }
 
+::ng-deep .cssInput {
+    border-radius: 10px;
+  }
+
 // btn de connexion
 .cssBtnContainer{
     margin-top: 30px;
@@ -145,3 +149,10 @@
         margin-top: 20px;
     }
 }
+
+
+
+
+ion-input {
+    --border-radius: 6px; /* Adjust as needed */
+  }

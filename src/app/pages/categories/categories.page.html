@@ -8,19 +8,23 @@
         <fa-icon icon="shopping-basket"></fa-icon>
         <ion-badge *ngIf="commandeNum > 0">{{commandeNum}}</ion-badge>
       </span>
-      
+
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="bgInterface2">
 
-  <!-- <div class="cssSlider">
-    <ion-slides pager="true" [options]="slideOpts">
-      <ion-slide [routerLink]="['/slide', {id: article.id, title:article.title, img:article.img, text:article.text}]" *ngFor="let article of articles" [style.background-image]="'url('+ url+'/images/image_cat'+article.id+'.png' +')'">
-      </ion-slide>
-    </ion-slides>
-  </div> -->
+  <div class="cssSlider">
+    <swiper-container slides-per-view="1" speed="400" loop="true" css-mode="true" navigation="true" pagination="true" scrollbar="true">
+      <swiper-slide [routerLink]="['/slide', {id: article.id, title:article.title, img:article.img, text:article.text}]"
+        *ngFor="let article of articles"
+        [style.background-image]="'url('+ url+'/images/image_cat'+article.id+'.png' +')'">
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+
 
   <ion-grid class="cssContainer">
 
@@ -51,15 +55,15 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row >
+    <ion-row>
       <ion-col size="12" class="ion-no-padding">
         <div class="cssSlider2">
-          <!-- <ion-slides pager="true" [options]="slideOpts2" #mySlider2>
-            <ion-slide [routerLink]="['/products', {id: 'special', nom:'عروض اليوم', special:true}]"
+          <swiper-container pager="true" slides-per-view="1" speed="400" loop="true" css-mode="true" navigation="true" pagination="true" scrollbar="true">
+            <swiper-slide [routerLink]="['/products', {id: 'special', nom:'عروض اليوم', special:true}]"
               *ngFor="let p of specialorders"
               [style.background-image]="'url('+ url+'/images/image_'+p.code+'.png' +')'">
-            </ion-slide>
-          </ion-slides> -->
+            </swiper-slide>
+          </swiper-container>
         </div>
       </ion-col>
     </ion-row>
@@ -90,7 +94,7 @@
 
 
 
- <!--  
+<!--  
 <ion-footer style="color:white">
   <ion-toolbar  color="dark" mode="ios">
     <ion-title><a target="_blank" style="color:white; text-decoration:non;" class="tajawal-Boldd policy"  routerLink="/policy">سياسة الخصوصية</a> </ion-title>

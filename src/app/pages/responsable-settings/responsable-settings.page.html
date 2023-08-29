@@ -117,7 +117,8 @@
         </ion-button>
       </ion-row>
     </div>
-    <div *ngIf="!hasBoss">
+
+    <div *ngIf="!hasBoss && (role=='V' || role=='C')">
       <ion-row class="space-arround">
         <h1 class="cssLabel tajawal-Medium max_content">
           تحديد اليوم والحي
@@ -147,13 +148,14 @@
       </ion-row>
 
       <ion-row class="space-arround">
-        <ion-button [disabled]="spinner1" expand="full" (click)="setVendeurDayZone()"
+        <ion-button [disabled]="spinner1" expand="full" (click)="setVendeurDayZone2()"
           class="cssLabel tajawal-Medium fullWidth">
           إدراج
           <ion-spinner style="color: #fcf6f6; margin-right: 10px" *ngIf="spinner1"></ion-spinner>
         </ion-button>
       </ion-row>
     </div>
+
     <div *ngIf="role=='R'">
       <ion-row class="space-arround">
         <h1 class="cssLabel tajawal-Medium max_content">

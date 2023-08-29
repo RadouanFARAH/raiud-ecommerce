@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { Geolocation,GeolocationOptions } from '@awesome-cordova-plugins/geolocation/ngx';
-import { Geolocation,PositionOptions } from '@capacitor/geolocation';
+import { Geolocation, PositionOptions } from '@capacitor/geolocation';
 
 import { SharedService } from '../../shared.service';
 
@@ -21,6 +21,7 @@ import { ToastService } from 'src/app/toasts/toast.service';
 export class VendeurHomePage implements OnInit {
   // etatDemande : V/Validé, A/Attente, R/Refusé
   other_places = false;
+
   data = {
     jour: new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long' }),
     zone: "",
@@ -49,16 +50,42 @@ export class VendeurHomePage implements OnInit {
   dashboard: boolean = false;
   demandeV_other_places: boolean = false;
   canshowlocation: boolean = false;
-  unit: string='m';
+  unit: string = 'm';
   lat!: number;
   lng!: number;
   source!: string;
   destination!: string;
+  currentLatitude: number | undefined;
+  currentLongitude: number | undefined;
 
-  constructor( private toast: ToastService,private launchnavigator: LaunchNavigator,private sharedService: SharedService,private geolocation: Geolocation,private router: ActivatedRoute, private route: Router, public modalController: ModalController, private menu: MenuController, private paramService: ParametresService) { }
+  constructor(private toast: ToastService, private launchnavigator: LaunchNavigator, private sharedService: SharedService, private router: ActivatedRoute, private route: Router, public modalController: ModalController, private menu: MenuController, private paramService: ParametresService) { }
 
 
-  async openRejectConsumerModal(id:any) {
+  showing = 'إظهار'
+  toggleValue: boolean = false;
+
+  updateVariableValue(newValue: boolean) {
+    this.sharedService.setVariableValue(newValue);
+  }
+  showedlocation = false;
+  toggleChanged() {
+    this.updateVariableValue(this.toggleValue)
+    if (this.toggleValue) {
+      this.requestLocalizationPermission()
+      this.showedlocation = true
+    } else {
+      this.undoLocalizationPermission()
+    }
+  }
+  subscription: any;
+  undoLocalizationPermission() {
+    this.canshowlocation = false;
+  }
+  requestLocalizationPermission() {
+    this.subscription = Geolocation.watchPosition({}, () => { }).catch(() => { })
+  }
+
+  async openRejectConsumerModal(id: any) {
     const modal = await this.modalController.create({
       component: RejetsPage,
       cssClass: 'my-custom-class',
@@ -68,85 +95,85 @@ export class VendeurHomePage implements OnInit {
     });
     await modal.present();
   }
-  navigate(longitude:any, latitude:any) {
+  navigate(longitude: any, latitude: any) {
     console.log("ready to navigate ..");
     AndroidPermissions.checkPermission(AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(
       result => {
-          if (result.hasPermission) {
-              // If having permission show 'Turn On GPS' dialogue
-              Geolocation.getCurrentPosition().then((resp) => {
-                console.log(resp.coords);
-                this.lat = resp.coords.latitude
-                this.lng = resp.coords.longitude
-                this.source = this.lat+','+ this.lng
-                let options: LaunchNavigatorOptions = {
-                    start: this.source,
-                    app: this.launchnavigator.APP.GOOGLE_MAPS
-                };
-                this.destination = latitude+','+longitude
-                console.log("navigating ...", options.start , '---> ', this.destination);
-                
-                this.launchnavigator.navigate(this.destination, options).then((value)=>{
-                  console.log("navigating success");
-                  
-                }).catch((err)=>{
-                  console.log("nvaigating error ", err);
-                  
-                })
-            }).catch((error) => {
-              console.log(error);
-                // this.toast.presentErrorToast('', 5000)
-            });
-          } else {
-              // If not having permission ask for permission
-              AndroidPermissions.requestPermission(AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
-              .then(
-                  (result) => {
-                      if (result.hasPermission) {
-                          // call method to turn on GPS
-                          Geolocation.getCurrentPosition().then((resp) => {
-                            console.log(resp.coords);
-                            this.lat = resp.coords.latitude
-                            this.lng = resp.coords.longitude
-                            this.source = this.lat+','+this.lng
-                            let options: LaunchNavigatorOptions = {
-                                start: this.source,
-                                app: this.launchnavigator.APP.GOOGLE_MAPS
-                            };
-                            this.destination = latitude +','+ longitude
-                            console.log("navigating ...", options.start , '---> ', this.destination);
-                            
-                            this.launchnavigator.navigate(this.destination, options).then((value)=>{
-                              console.log("navigating success");
-                              
-                            }).catch((err)=>{
-                              console.log("nvaigating error ", err);
-                              
-                            })
-                        }).catch((error) => {
-                          console.log(error);
-                            // this.toast.presentErrorToast('', 5000)
-                        });
-                      } else {
-                        this.toast.presentErrorToast('يرجى تفعيل GPS الخاص بك ',3000)
-                      }
-                  },
-                  error => {
-                      // Show alert if user click on 'No Thanks'
-                      this.toast.presentErrorToast('يرجى تفعيل GPS الخاص بك ',3000)
-                  }
-              );
-          }
+        if (result.hasPermission) {
+          // If having permission show 'Turn On GPS' dialogue
+          Geolocation.getCurrentPosition().then((resp) => {
+            console.log(resp.coords);
+            this.lat = resp.coords.latitude
+            this.lng = resp.coords.longitude
+            this.source = this.lat + ',' + this.lng
+            let options: LaunchNavigatorOptions = {
+              start: this.source,
+              app: this.launchnavigator.APP.GOOGLE_MAPS
+            };
+            this.destination = latitude + ',' + longitude
+            console.log("navigating ...", options.start, '---> ', this.destination);
+
+            this.launchnavigator.navigate(this.destination, options).then((value) => {
+              console.log("navigating success");
+
+            }).catch((err) => {
+              console.log("nvaigating error ", err);
+
+            })
+          }).catch((error) => {
+            console.log(error);
+            // this.toast.presentErrorToast('', 5000)
+          });
+        } else {
+          // If not having permission ask for permission
+          AndroidPermissions.requestPermission(AndroidPermissions.PERMISSION.ACCESS_FINE_LOCATION)
+            .then(
+              (result) => {
+                if (result.hasPermission) {
+                  // call method to turn on GPS
+                  Geolocation.getCurrentPosition().then((resp) => {
+                    console.log(resp.coords);
+                    this.lat = resp.coords.latitude
+                    this.lng = resp.coords.longitude
+                    this.source = this.lat + ',' + this.lng
+                    let options: LaunchNavigatorOptions = {
+                      start: this.source,
+                      app: this.launchnavigator.APP.GOOGLE_MAPS
+                    };
+                    this.destination = latitude + ',' + longitude
+                    console.log("navigating ...", options.start, '---> ', this.destination);
+
+                    this.launchnavigator.navigate(this.destination, options).then((value) => {
+                      console.log("navigating success");
+
+                    }).catch((err) => {
+                      console.log("nvaigating error ", err);
+
+                    })
+                  }).catch((error) => {
+                    console.log(error);
+                    // this.toast.presentErrorToast('', 5000)
+                  });
+                } else {
+                  this.toast.presentErrorToast('يرجى تفعيل GPS الخاص بك ', 3000)
+                }
+              },
+              error => {
+                // Show alert if user click on 'No Thanks'
+                this.toast.presentErrorToast('يرجى تفعيل GPS الخاص بك ', 3000)
+              }
+            );
+        }
       },
       err => { alert(err); }
-  );
+    );
 
 
-}
+  }
   getDashboard() {
     this.data.demandeR = []
     this.data.demandeV = []
-    this.data  = {
+    this.data = {
       jour: new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long' }),
       zone: "",
       responsable: "",
@@ -198,6 +225,16 @@ export class VendeurHomePage implements OnInit {
     this.sharedService.variableValue$.subscribe((value) => {
       // Handle the variable value change here
       console.log('Variable value changed:', value);
+      if (value){
+        this.showing = 'إخفاء'
+
+      } else {
+        this.showing = 'إظهار'
+
+      }
+      if (!this.showedlocation) {
+        this.refresh()
+      }
       this.canshowlocation = value
     });
   }
@@ -210,7 +247,11 @@ export class VendeurHomePage implements OnInit {
   ionViewWillLeave() {
     this.menu.enable(false, 'vendeur-menu')
   }
-  doRefresh(event:any) {
+  doRefresh(event: any) {
+    this.showedlocation = false;
+    this.toggleValue = false;
+    this.canshowlocation = false
+    this.updateVariableValue(false)
     this.refresh_variables()
     this.getDashboard()
     this.getDashboardOther_places()
@@ -218,12 +259,17 @@ export class VendeurHomePage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-
+  refresh() {
+    this.refresh_variables()
+    this.getDashboard()
+    this.getDashboardOther_places()
+  }
   passOrder() {
     this.route.navigate(["categories"])
   }
 
-  refresh_variables(){
+  refresh_variables() {
+
     this.other_places = false;
     this.data = {
       jour: new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long' }),
@@ -245,45 +291,87 @@ export class VendeurHomePage implements OnInit {
     }
     this.isShow = false;
     this.numClickMenu = 0;
-    this.tapped= false;
-    this.demandeR=false;
-    this.demandeV=false;
-    this.demandeA=false;
-    this.dashboard=false;
+    this.tapped = false;
+    this.demandeR = false;
+    this.demandeV = false;
+    this.demandeA = false;
+    this.dashboard = false;
     this.demandeV_other_places = false;
-  
+
   }
+  calculateDistance(lat: number, long: number) {
 
-  async calculateDistance(latitude: number, longitude: number) {
-    return new Promise((resolve, reject)=>{
-
+    return new Promise((resolve, reject) => {
       const options: PositionOptions = {
         enableHighAccuracy: true,
       };
-  
-      Geolocation.getCurrentPosition(options).then((position) => {
-        const currentLatitude = position.coords.latitude;
-        const currentLongitude = position.coords.longitude;
-  
+      if (this.currentLatitude && this.currentLongitude) {
         // Calculate the distance
-        console.log("coordonnées :",currentLatitude, currentLongitude,latitude,longitude );
-        
         const distance = this.getDistanceFromLatLonInKm(
-          currentLatitude,
-          currentLongitude,
-          latitude,
-          longitude
+          this.currentLatitude,
+          this.currentLongitude,
+          lat,
+          long
         );
-          resolve(distance)
         console.log('Distance:', distance);
-      }).catch((error) => {
+        resolve(distance)
+      } else {
+        Geolocation.getCurrentPosition(options).then((position) => {
+          console.log("Got current position :", position);
+          this.currentLatitude = position.coords.latitude;
+          this.currentLongitude = position.coords.longitude;
+
+          // Calculate the distance
+          const distance = this.getDistanceFromLatLonInKm(
+            this.currentLatitude,
+            this.currentLongitude,
+            lat,
+            long
+          );
+          console.log('Distance:', distance);
+          resolve(distance)
+
+        }).catch((error) => {
         resolve(0)
-        console.log('Error getting current position', error);
-      });
+          console.log('Error getting current position', error);
+        });
+      }
+
     })
 
-
   }
+
+  // async calculateDistance(latitude: number, longitude: number) {
+  //   return new Promise((resolve, reject) => {
+
+  //     const options: PositionOptions = {
+  //       enableHighAccuracy: true,
+  //     };
+
+
+  //     Geolocation.getCurrentPosition(options).then((position) => {
+  //       const currentLatitude = position.coords.latitude;
+  //       const currentLongitude = position.coords.longitude;
+
+  //       // Calculate the distance
+  //       console.log("coordonnées :", currentLatitude, currentLongitude, latitude, longitude);
+
+  //       const distance = this.getDistanceFromLatLonInKm(
+  //         currentLatitude,
+  //         currentLongitude,
+  //         latitude,
+  //         longitude
+  //       );
+  //       resolve(distance)
+  //       console.log('Distance:', distance);
+  //     }).catch((error) => {
+  //       resolve(0)
+  //       console.log('Error getting current position', error);
+  //     });
+  //   })
+
+
+  // }
 
   getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371; // Radius of the earth in kilometers
@@ -294,10 +382,10 @@ export class VendeurHomePage implements OnInit {
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var distance = R * c * 1000;
-    
-    if (distance > 1000){
-      distance = distance/1000
-      this.unit =  'Km'
+
+    if (distance > 1000) {
+      distance = distance / 1000
+      this.unit = 'Km'
     } // Distance in km
     return distance;
   }
@@ -319,28 +407,28 @@ export class VendeurHomePage implements OnInit {
     this.demandeA = true
     this.paramService.getconsoAttente().subscribe((result: any) => {
       this.tapped = true
-      result.forEach(async (row:any) => {
-        if (this.canshowlocation){
+      result.forEach(async (row: any) => {
+        if (this.canshowlocation) {
           var distance = await this.calculateDistance(row.lat, row.lng)
           row.distance = distance
         }
         this.data.demandeA.push(row)
 
-        
+
       })
     })
     this.paramService.consoRefuse().subscribe((result: any) => {
       this.tapped = true
-      result.forEach((row:any) => {
+      result.forEach((row: any) => {
         this.data.demandeR.push(row)
       })
     })
     this.getConsoValide(false)
   }
-  getConsoValide(other_places:any) {
+  getConsoValide(other_places: any) {
     this.data.demandeV_other_places = []
     this.data.noteJour_other_places = null
-    this.data.demandeV =[]
+    this.data.demandeV = []
     this.data.demandeV_other_places = []
     this.data.noteJour = null;
     this.paramService.getconsovalide({ other_places }).subscribe((result: any) => {
@@ -351,8 +439,8 @@ export class VendeurHomePage implements OnInit {
       if (this.data.demandeV_other_places.length) for (let i = 0; i < this.data.demandeV_other_places.length; i++) {
 
         let idconsommateur = this.data.demandeV_other_places[i].idConsommateur
-        
-        this.paramService.sellerGainFromClientToday({ idconsommateur }).subscribe((res:any) => {
+
+        this.paramService.sellerGainFromClientToday({ idconsommateur }).subscribe((res: any) => {
           this.data.demandeV_other_places[i].pointtotal = res
           this.data.noteJour_other_places += res
 
@@ -362,7 +450,7 @@ export class VendeurHomePage implements OnInit {
         let idconsommateur = this.data.demandeV[i].idConsommateur
         this.data.noteJour = null;
 
-        this.paramService.sellerGainFromClientToday({ idconsommateur }).subscribe((res:any) => {
+        this.paramService.sellerGainFromClientToday({ idconsommateur }).subscribe((res: any) => {
           this.data.demandeV[i].pointtotal = res
           this.data.noteJour += res
 

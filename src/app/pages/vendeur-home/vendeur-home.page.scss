@@ -523,3 +523,16 @@ ion-button {
     position: relative;
     overflow: hidden;
 }
+
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    /* Vertically center align items */
+}
+
+.custom-toggle {
+    margin-left: auto;
+    /* Push the toggle to the right, adjust as needed */
+    margin-right: 0;
+}

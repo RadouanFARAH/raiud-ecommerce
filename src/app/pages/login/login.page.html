@@ -28,7 +28,7 @@
           <ion-col>
             <div>
               <ion-label  aria-label=""  class="cssLabel tajawal-Medium"> الرمز السري</ion-label>
-              <ion-input placeholder="&#11044; &#11044; &#11044; &#11044; &#11044; &#11044; &#11044; &#11044;"
+              <ion-input  placeholder="&#11044; &#11044; &#11044; &#11044; &#11044; &#11044; &#11044; &#11044;"
                 [type]="!showPassword ? 'password' : 'text'" class="cssInput tajawal-Medium" [name]="password"
                 formControlName="pwd" autocomplete="off">
               </ion-input>
@@ -40,17 +40,23 @@
 
         <ion-row>
           <ion-col>
+            <div>
+              <ion-input aria-disabled="true" disabled></ion-input>
+            </div>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col>
             <div class="cssBtnContainer">
               <ion-button expand="block" class="tajawal-Bold cssBtn color1" (click)="login()">
                 دخول <ion-spinner style="color:red; margin-right: 10px;" *ngIf="spinner"></ion-spinner>
               </ion-button>
-
             </div>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="cssLink">
-            
             <h3 (click)="changePassword()" class="tajawal-Boldd">تغيير كلمة السر ؟</h3>
             <h3 routerLink="/logcity" class="tajawal-Boldd">لازلت لا تملك حساب ؟<span>إضغط هنا</span></h3>
       </ion-col>

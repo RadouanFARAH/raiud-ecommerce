@@ -31,7 +31,7 @@ export class VendeurDemandedetailPage implements OnInit {
     somme: number=0;
     printing!: boolean;
 
-    constructor(private toast: ToastService, private loadingCtrl: LoadingController, private geolocation: Geolocation, private printer: Printer, private launchnavigator: LaunchNavigator, private goelocal: Geolocation, private navCtrl: NavController, private activeRoute: ActivatedRoute, private paramService: ParametresService) {
+    constructor(private toast: ToastService, private loadingCtrl: LoadingController, private geolocation: Geolocation, private printer: Printer, private launchnavigator: LaunchNavigator, private navCtrl: NavController, private activeRoute: ActivatedRoute, private paramService: ParametresService) {
         this.activeRoute.params.subscribe((params) => {
             this.code = params['code'];
             this.link = params['link'];

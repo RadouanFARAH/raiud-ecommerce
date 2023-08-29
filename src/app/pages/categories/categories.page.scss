@@ -13,7 +13,7 @@
 //     margin: 0px auto;
 //     border-radius: 10px;
 // }
-.cssSlider ion-slides{
+.cssSlider swiper-container{
     // width: 100%;
     width: 94%;
     height: 150px;
@@ -21,7 +21,7 @@
     margin-top: 12px;
     border-radius: 10px;
 }
-.cssSlider ion-slide{
+.cssSlider swiper-slide{
     width: 100%;
     // background-size: contain;
     background-size: 98% 98%;
@@ -35,14 +35,14 @@
     background: #ffffff;
     // border-radius: 0px 0px 8px 8px;
 }
-.cssSlider2 ion-slides{
+.cssSlider2 swiper-container{
     // width: 100%;
     width: 100%;
     height: 300px;
     margin: 0px auto;
     border-radius: 0px 0px 10px 10px;
 }
-.cssSlider2 ion-slide{
+.cssSlider2 swiper-slide{
     width: 100%;
     background-position: center; 
     background-repeat: no-repeat; 
@@ -271,10 +271,10 @@
 // }
 @media only screen and (max-width: 362px) {
     // --- slider
-    .cssSlider ion-slides{
+    .cssSlider swiper-container{
         height: 150px;
     }
-    .cssSlider ion-slide{
+    .cssSlider swiper-slide{
         width: 96%;
     }
     // --- time down
@@ -297,7 +297,7 @@
         font-weight: 500;
     }
 
-    .cssSlider2 ion-slides{
+    .cssSlider2 swiper-container{
         height: 220px;
     }
     // --- small categories

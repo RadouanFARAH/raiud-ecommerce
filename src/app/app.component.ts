@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { SharedService } from './shared.service';
+import { register } from 'swiper/element/bundle';
 
+register();
 import {
   Platform,
   AlertController,
@@ -16,7 +18,6 @@ import { ToastService } from './toasts/toast.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ParametresService } from './services/parametres.service';
 import { environment } from 'src/environments/environment';
-import { Geolocation, PositionOptions } from '@capacitor/geolocation';
 import { StorageService } from './services/storage.service';
 
 @Component({
@@ -33,7 +34,6 @@ export class AppComponent {
   newProfileURL!: SafeUrl;
   connectedID: any;
   url: string = environment.url;
-  subscription: any;
   hasBoss: any= true;
   constructor(
     private userService: UserService,
@@ -45,7 +45,6 @@ export class AppComponent {
     private helper: JwtHelperService,
     private storage:StorageService,
     private route: ActivatedRoute,
-    private geolocation: Geolocation,
     private sharedService: SharedService
   ) {
     console.log("**************************************************************TEST***************************************************************************");
@@ -71,9 +70,7 @@ export class AppComponent {
     this.initializeApp();
 
   }
-  updateVariableValue(newValue: boolean) {
-    this.sharedService.setVariableValue(newValue);
-  }
+
   async ngOnInit() {
     // await this.storage.create();
     this.storage.get('role')?.then((role) => {
@@ -240,34 +237,6 @@ export class AppComponent {
   }
   sanitizeImageUrl(imageUrl: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-  }
-  showing = 'إخفاء'
-
-  toggleValue: boolean = false;
-  toggleChanged() {
-    this.updateVariableValue(this.toggleValue)
-    if (this.toggleValue) {
-      this.showing = 'إخفاء'
-      this.requestLocalizationPermission()
-    } else {
-      this.showing = 'إظهار'
-      this.undoLocalizationPermission()
-    }
-  }
-  undoLocalizationPermission() {
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-  requestLocalizationPermission() {
-    const options: PositionOptions = {
-      enableHighAccuracy: true,  // Enable high accuracy mode
-      timeout: 5000,             // Set a timeout value in milliseconds
-      maximumAge: 0              // Set the maximum age for cached location
-    };
-
-    this.subscription = Geolocation.watchPosition({},()=>{}).catch(()=>{})
   }
 
 

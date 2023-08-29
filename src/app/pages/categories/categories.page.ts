@@ -78,6 +78,7 @@ export class CategoriesPage implements OnInit {
     speed: 400,
     autoplay: true
   };
+  
 
   imgsSlider2 = [
     "../../../assets/images/product/prod5.jpg",
