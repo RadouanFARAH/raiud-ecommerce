@@ -4,15 +4,15 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.raiud.ecommerce",
+  "applicationId": "io.ionic.raiud",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 30201,
-      "versionName": "3.2.1",
+      "versionCode": 30202,
+      "versionName": "3.2.2",
       "outputFile": "app-release.apk"
     }
   ],

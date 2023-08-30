@@ -1,33 +1,33 @@
 apply plugin: 'com.android.application'
 
 android {
-
-  buildToolsVersion '30.0.3'
-  namespace "com.raiud.ecommerce"
-  compileSdk 33
-  defaultConfig {
-        applicationId "com.raiud.ecommerce"
-        minSdkVersion rootProject.ext.minSdkVersion
-    targetSdk targetSdkVersion
-    versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    buildToolsVersion '34.0.0'
+    namespace 'io.ionic.raiud'
+    compileSdk 33
+    defaultConfig {
+        applicationId 'io.ionic.raiud'
+        minSdk 31
+        targetSdk 33
+        versionCode 30202
+        versionName '3.2.2'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         aaptOptions {
-             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
-             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+            // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 repositories {
-    flatDir{
+    flatDir {
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
     }
 }
@@ -51,6 +51,6 @@ try {
     if (servicesJSON.text) {
         apply plugin: 'com.google.gms.google-services'
     }
-} catch(Exception e) {
+} catch (Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
 }
