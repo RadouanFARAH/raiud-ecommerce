@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
 
-  buildToolsVersion '30.0.3'
+  buildToolsVersion buildToolsVersion
   namespace "com.raiud.ecommerce"
-  compileSdk 33
+  compileSdk compileSdkVersion1
   defaultConfig {
-        applicationId "com.raiud.ecommerce"
-        minSdkVersion rootProject.ext.minSdkVersion
-    targetSdk targetSdkVersion
-    versionCode 1
-        versionName "1.0"
+        applicationId defaultApplicationId1
+    minSdk defaultMinSdkVersion1
+    targetSdk defaultTargetSdkVersion1
+    versionCode defaultVersionCode1
+        versionName defaultVersionName1
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -20,7 +20,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled releaseMinifyEnabled
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

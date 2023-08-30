@@ -17,6 +17,22 @@ buildscript {
 
 apply from: "variables.gradle"
 
+ext {
+    defaultVersionCode = 30202
+    defaultApplicationId = 'io.ionic.raiud'
+    defaultVersionName = '3.2.2'
+    defaultMinSdkVersion = 29
+    defaultTargetSdkVersion = 33
+    defaultApplicationId1 = 'io.ionic.raiud'
+    defaultVersionCode1 = 30202
+    defaultVersionName1 = '3.2.2'
+    defaultTargetSdkVersion1 = 33
+    defaultMinSdkVersion1 = 29
+    compileSdkVersion1 = 33
+    buildToolsVersion = '34.0.0'
+  releaseMinifyEnabled = true
+}
+
 allprojects {
     repositories {
         google()
