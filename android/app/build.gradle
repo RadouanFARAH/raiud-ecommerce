@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
 
   buildToolsVersion buildToolsVersion
-  namespace "com.raiud.ecommerce"
+  namespace "io.ionic.raiud"
   compileSdk compileSdkVersion1
   defaultConfig {
         applicationId defaultApplicationId1
