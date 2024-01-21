@@ -71,7 +71,7 @@
     <div *ngIf="role=='R'">
       <ion-row class="space-arround">
         <h1 class="cssLabel tajawal-Medium max_content">
-          تحديد اليوم والحي لكل بائع
+          تحديد اليوم والحي {{solo=='O'?'':'لكل بائع'}}
         </h1>
       </ion-row>
       <ion-row class="space-arround">
@@ -156,10 +156,10 @@
       </ion-row>
     </div>
 
-    <div *ngIf="role=='R'">
+    <div *ngIf="role=='R' || solo =='O'">
       <ion-row class="space-arround">
         <h1 class="cssLabel tajawal-Medium max_content">
-          تحديد هدف كل بائع في الشهر
+          تحديد هدف {{solo=='O'?'':'لكل بائع'}} في الشهر
         </h1>
       </ion-row>
       <ion-row class="space-arround">
@@ -250,11 +250,11 @@
       </ion-row>
     </div>
 
-    <div *ngIf="role=='D'">
+    <div *ngIf="role=='D' || solo == 'O'">
       <ion-row class="space-arround">
         <h1 class="cssLabel tajawal-Medium max_content">
           إضافة أو حذف شراء المشترك
-        </h1>
+      </h1>
       </ion-row>
       <ion-row class="space-arround">
         <ion-col class="ion-no-padding cssHigh">
@@ -307,14 +307,17 @@
       </ion-row>
     </div>
 
-    <div *ngIf="role=='D'">
+
+
+
+    <div *ngIf="role=='D' || solo == 'O'">
       <ion-row class="space-arround">
         <h1 class="cssLabel tajawal-Medium max_content">تحديد نقاط كل منتج</h1>
       </ion-row>
       <ion-row class="space-arround">
         <ion-col class="ion-no-padding cssHigh">
           <div class="cssToRight">
-            <ion-label  aria-label=""  class="cssLabel tajawal-Medium">الفئة</ion-label>
+            <ion-label  aria-label="" class="cssLabel tajawal-Medium">الفئة</ion-label>
             <ion-select [(ngModel)]="selectedCategory2" (ionChange)="categoryChanged2()"
               class="cssInput tajawal-Medium">
               <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category.nom}}

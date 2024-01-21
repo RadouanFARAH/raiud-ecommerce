@@ -33,8 +33,6 @@ export class MyCartPage implements OnInit {
 
   constructor(private toastService: ToastService, private paramService: ParametresService, private navCtrl: NavController, private ref: ChangeDetectorRef, public alertIonic: AlertController, private orderService: MyOrdersService, private activeRouter: ActivatedRoute) {
     this.orderService.myCart.subscribe((data:any) => {
-      console.log("cart data ", data);
-
       this.data = data
       if (this.data.length) {
         this.show = true
@@ -131,7 +129,6 @@ export class MyCartPage implements OnInit {
         this.totalPrice += (this.app_cost || 1) + ((this.totalPrice * (this.percent)) / 100) + (delivery_price)
       }
       resolve('finished')
-      console.log("cart data ", this.data);
     })
 
 
@@ -174,7 +171,12 @@ export class MyCartPage implements OnInit {
 
 
 
-  onChangeTotals() {
+  async onChangeTotals() {
+    let done2 = await this.parametring2()
+    let done3 = await this.parametring3()
+    let done4 = await this.parametring4()
+    let done5 = await this.parametring5()
+    this.showAwait = false
 
     this.totalPoints_v = 0
     this.totalPoints_c = 0
@@ -204,7 +206,7 @@ export class MyCartPage implements OnInit {
 
   msg = "سيتم إرسال طلبك إلى البائع الخاص بك، هل أنت متأكد من القيام بالشراء ؟"
   async sendOrder() {
-    await this.doAllSettings()
+    // await this.doAllSettings()
     const alert = await this.alertIonic.create({
       cssClass: 'my-custom-class',
       header: '',

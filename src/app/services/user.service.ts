@@ -16,6 +16,7 @@ export class UserService {
 
   name = new BehaviorSubject('');
   role = new BehaviorSubject('');
+  solo = new BehaviorSubject('');
   Url = environment.url + "/user";
   constructor(private http: HttpClient) { }
 

@@ -55,6 +55,7 @@ export class LogregisterPage implements OnInit {
   image: any;
   updateData: any;
   wantedToUpdateCoordinates: any=false;
+  solo: boolean =false;
   constructor(private platform: Platform, private paramService: ParametresService, private sanitizer: DomSanitizer, private toast: ToastService, private storage: StorageService, private navCtrl: NavController, private locationService: VilleQuartierService, private fb: FormBuilder, private userService: UserService, private activeRoute: ActivatedRoute, private route: Router) {
     this.storage.get('id')?.then((id) => {
       this.id = id
@@ -71,7 +72,9 @@ export class LogregisterPage implements OnInit {
 
     })
     this.activeRoute.params.subscribe((params) => {
-
+      if (params['solo']) {
+        this.solo = true;
+      }
       if (params['ville']) {
         this.beingRegistred = false
         this.ville = params['ville'];
@@ -187,7 +190,7 @@ export class LogregisterPage implements OnInit {
         email: ["", Validators.email],
         nameStore: [""],
         typeStore: [""],
-        password: [""]
+        password: [""],
       })
       this.data.valueChanges.subscribe(()=>{
         console.log("data value:",this.data.value);
@@ -268,7 +271,7 @@ export class LogregisterPage implements OnInit {
       this.toast.presentErrorToast('رقم الهاتف أو الواتس اب غير صحيح', 5000);
     } else {
 
-      let data = { ...this.data.value, genre: this.genre, role: this.role, host: this.id, generatePassword: this.generatePassword, lat: this.lat, lng: this.lng , beingRegistred:this.beingRegistred}
+      let data = { ...this.data.value, genre: this.genre, role: this.role, host: this.id, generatePassword: this.generatePassword, lat: this.lat, lng: this.lng , beingRegistred:this.beingRegistred, solo:this.solo}
 
       this.userService.register(data).subscribe((res: any) => {
         this.spinner = false
@@ -279,7 +282,6 @@ export class LogregisterPage implements OnInit {
           
           this.paramService.setProfileImage(formData).subscribe((res: any) => {
             console.log("profile image uploaded with success");
-            
           }, async (err) => {
             console.log(err)
           })

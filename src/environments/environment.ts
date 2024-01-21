@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   APIkey: "AIzaSyD3MM2b5G0CIqWHPSo8790JAzNiFOS-Tro",
-  // url: "http://blooming.dreamhost.com:2022",
-  url: "https://www.raiud.com:5000"
+  url: "https://raiud.com:5000"
 
 };
 

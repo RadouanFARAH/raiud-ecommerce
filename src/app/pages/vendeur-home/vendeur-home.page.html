@@ -145,6 +145,7 @@
       </ion-row>
     </div>
     <div *ngIf="demandeA">
+      <h1>هناك {{data.demandeA.length}} بيانات</h1>
       <ion-row *ngFor="let d of data.demandeA">
         <ion-col class="ion-no-padding">
           <div class="cssSmallCard6">
@@ -210,12 +211,12 @@
                   *ngIf="!data.noteJour_other_places&&!dashboard"></ion-spinner>{{data.noteJour_other_places?data.noteJour_other_places:dashboard?0:data.noteJour_other_places}}
               </p>
             </div>
-            <div>
+            <!-- <div>
               <p class="cssLibel almarai-ExtraBold">عدد العملاء</p>
               <p class="cssValue almarai-Regular"><ion-spinner
                   *ngIf="!data.nbrTotalConso_other_places&&!dashboard"></ion-spinner>{{data.nbrTotalConso_other_places}}
               </p>
-            </div>
+            </div> -->
           </div>
           <div class="cssFlex cssFlexColumn">
             <div (click)="didOrder_other_places()" class="cssSmallCard5 ion-activatable ripple-parent">

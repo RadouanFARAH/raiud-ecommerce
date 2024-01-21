@@ -178,7 +178,7 @@
           </div>
         </ion-col>
 
-        <ion-col class="ion-no-padding">
+        <ion-col class="ion-no-padding" *ngIf="role != 'V'">
           <div>
             <ion-label  aria-label=""  class="cssLabel tajawal-Bold">نقطة البائع  </ion-label>
             <ion-input (keypress)="preventCaracters($event)" placeholder="ضع نقطة البائع"  type="text"  class="cssInput tajawal-Medium" formControlName="point_v">

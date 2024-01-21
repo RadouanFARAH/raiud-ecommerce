@@ -76,6 +76,8 @@ export class ResponsableSettingsPage implements OnInit {
   selectedVille1: any;
   spinner6: boolean = false;
   hasBoss: any;
+  solo: string='N';
+  id: any;
   constructor(
     private articleService: ArticleService,
     private sanitizer: DomSanitizer, private fb: FormBuilder, private navCtrl: NavController, private userService: UserService, private toast: ToastService, private paramService: ParametresService, private storage: StorageService, private toastCtrl: ToastController, private vendeurService: VendeurMyConsoService, private villesService: VilleQuartierService, private responsableService: ResponsableService) {
@@ -96,7 +98,14 @@ export class ResponsableSettingsPage implements OnInit {
         }
       }
     })
+    this.storage.get('id')?.then((id) => {
+      console.log(" id is", id);
 
+      if (id) {
+        this.id = id
+
+      }
+    })
     this.storage.get('hasBoss')?.then((value) => {
       this.hasBoss = value
       if (!this.hasBoss) {
@@ -123,6 +132,7 @@ export class ResponsableSettingsPage implements OnInit {
     });
 
     this.getVendeurByResponsable();
+    this.getVendeurSolo();
   }
 
   get quartiers(): FormArray {
@@ -252,7 +262,7 @@ export class ResponsableSettingsPage implements OnInit {
     this.products = []
     this.customAlertOptions1.message = 'المرجو الإنتظار...'
 
-    this.paramService.getProductByCategoryNameOnly(id, 'ALL').subscribe((res: any) => {
+    this.paramService.getProductByCategoryNameOnly(id, 'ALL', this.solo, this.id).subscribe((res: any) => {
       this.products = res;
       if (this.products.length === 0) {
 
@@ -271,7 +281,7 @@ export class ResponsableSettingsPage implements OnInit {
 
     this.customAlertOptions2.message = 'المرجو الإنتظار...'
 
-    this.paramService.getProductByCategoryNameOnly(id, 'ALL').subscribe((res: any) => {
+    this.paramService.getProductByCategoryNameOnly(id, 'ALL', this.solo, this.id).subscribe((res: any) => {
       this.products2 = res
       if (this.products2.length === 0) {
         this.customAlertOptions2.message = 'لا يوجد منتج'
@@ -574,9 +584,24 @@ export class ResponsableSettingsPage implements OnInit {
     })
   }
   getVendeurByResponsable() {
-    this.responsableService.getVendeurByResponsable({}).subscribe((vendeurs) => {
+    this.responsableService.getVendeurByResponsable({solo:false}).subscribe((vendeurs) => {
       this.vendeurs = vendeurs
     })
+  }
+  getVendeurSolo() {
+    this.storage.get('solo')?.then((solo) => {
+      if (solo) {
+        this.solo = solo
+        if (this.solo == 'O') {
+          this.responsableService.getVendeurByResponsable({solo:true, id:this.id}).subscribe((vendeurs) => {
+            this.vendeurs = vendeurs
+          })
+          this.getCategories()
+        }
+      }
+    })
+
+
   }
   vendeurChanged(ville:any) {
     this.getQuartierByVille(ville)

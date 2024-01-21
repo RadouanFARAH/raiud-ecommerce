@@ -35,6 +35,7 @@ export class AppComponent {
   connectedID: any;
   url: string = environment.url;
   hasBoss: any= true;
+  solo: any;
   constructor(
     private userService: UserService,
     private platform: Platform,
@@ -66,6 +67,9 @@ export class AppComponent {
     this.userService.role.subscribe((n) => {
       this.role = n;
     });
+    this.userService.solo.subscribe((n) => {
+      this.solo = n;
+    });
 
     this.initializeApp();
 
@@ -76,6 +80,11 @@ export class AppComponent {
     this.storage.get('role')?.then((role) => {
       if (role) {
         this.role = role;
+      }
+    });
+    this.storage.get('solo')?.then((v) => {
+      if (v) {
+        this.solo = v;
       }
     });
     this.storage.get('hasBoss')?.then((value) => {

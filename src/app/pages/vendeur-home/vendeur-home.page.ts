@@ -40,6 +40,7 @@ export class VendeurHomePage implements OnInit {
     demandeV: [] as any[],
     demandeV_other_places: [] as any[]
   }
+
   isShow: boolean = false;
   numClickMenu: number = 0;
   userID: any;
@@ -215,6 +216,7 @@ export class VendeurHomePage implements OnInit {
       this.dashboard = true;
       this.data.nbrTotalConso_other_places = result[0].nbrTotalConso;
       this.data.consoValide_other_places = result[0].consoValide;
+      this.other_places = result[0].consoValide ? true : false
     })
     this.getConsoValide(true)
   }
@@ -225,7 +227,7 @@ export class VendeurHomePage implements OnInit {
     this.sharedService.variableValue$.subscribe((value) => {
       // Handle the variable value change here
       console.log('Variable value changed:', value);
-      if (value){
+      if (value) {
         this.showing = 'إخفاء'
 
       } else {
@@ -248,6 +250,7 @@ export class VendeurHomePage implements OnInit {
     this.menu.enable(false, 'vendeur-menu')
   }
   doRefresh(event: any) {
+    this.data.demandeA = []
     this.showedlocation = false;
     this.toggleValue = false;
     this.canshowlocation = false
@@ -270,7 +273,6 @@ export class VendeurHomePage implements OnInit {
 
   refresh_variables() {
 
-    this.other_places = false;
     this.data = {
       jour: new Date().toLocaleDateString('ar-EG-u-nu-latn', { weekday: 'long' }),
       zone: "",
@@ -297,6 +299,17 @@ export class VendeurHomePage implements OnInit {
     this.demandeA = false;
     this.dashboard = false;
     this.demandeV_other_places = false;
+
+    this.data.demandeR = []
+    this.data.demandeV = []
+    this.data.demandeA = []
+    this.data.demandeV_other_places = []
+    this.data.noteJour_other_places = null
+    this.data.noteJour = null;
+    this.demandeR = true
+    this.demandeV = true
+    this.demandeA = true
+    this.other_places = false;
 
   }
   calculateDistance(lat: number, long: number) {
@@ -332,7 +345,7 @@ export class VendeurHomePage implements OnInit {
           resolve(distance)
 
         }).catch((error) => {
-        resolve(0)
+          resolve(0)
           console.log('Error getting current position', error);
         });
       }
@@ -426,10 +439,10 @@ export class VendeurHomePage implements OnInit {
     this.getConsoValide(false)
   }
   getConsoValide(other_places: any) {
-    this.data.demandeV_other_places = []
-    this.data.noteJour_other_places = null
-    this.data.demandeV = []
-    this.data.demandeV_other_places = []
+    this.data.demandeV_other_places = [];
+    this.data.noteJour_other_places = null;
+    this.data.demandeV = [];
+    this.data.demandeV_other_places = [];
     this.data.noteJour = null;
     this.paramService.getconsovalide({ other_places }).subscribe((result: any) => {
       this.tapped = true

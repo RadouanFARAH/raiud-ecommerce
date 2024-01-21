@@ -225,7 +225,12 @@
           </span>
           <ion-label  aria-label=""  class="almarai-bold cssItemMenu">حصيلة المبيعات</ion-label>
         </ion-item>
-
+        <ion-item routerLink="/responsable-settings" *ngIf="solo == 'O'">
+          <span class="cssIconMenu">
+            <fa-icon icon="cog"></fa-icon>
+          </span>
+          <ion-label  aria-label=""  class="almarai-bold cssItemMenu">تعديلات</ion-label>
+        </ion-item>
         <ion-item routerLink="/responsable-settings" *ngIf="!hasBoss">
           <span class="cssIconMenu">
             <fa-icon icon="cog"></fa-icon>
@@ -301,7 +306,7 @@
             >قائمة المنتوجات</ion-label
           >
         </ion-item>
-        <ion-item routerLink="/responsable-settings" *ngIf="role == 'D'">
+        <ion-item routerLink="/responsable-settings" *ngIf="role == 'D' || solo == 'O'">
           <span class="cssIconMenu">
             <fa-icon icon="cog"></fa-icon>
           </span>

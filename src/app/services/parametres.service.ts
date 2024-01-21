@@ -80,8 +80,8 @@ export class ParametresService {
   getProductByCategory(id:any,special:any) {
     return this.http.post(this.Url + "/product" + "/getProductByCategory", { id, special })
   }
-  getProductByCategoryNameOnly(id:any,special:any) {
-    return this.http.post(this.Url + "/product" + "/getProductByCategoryNameOnly", { id, special })
+  getProductByCategoryNameOnly(id:any,special:any, solo:any, soloid:any ) {
+    return this.http.post(this.Url + "/product" + "/getProductByCategoryNameOnly", { id, special,solo, soloid })
   }
   setProduct(data:any) {
     return this.http.post(this.Url + "/product" + "/putProduct", data)
